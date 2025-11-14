@@ -32,6 +32,15 @@ export type Route = {
   }[];
 };
 
+/**
+ * Renders a sidebar navigation menu based on provided routes.
+ *
+ * The function utilizes the useSidebar hook to determine the current state of the sidebar (collapsed or expanded). It manages the open state of collapsible items and renders each route as a menu item. If a route has sub-routes, it displays them in a collapsible format, allowing users to expand or collapse the sections. The appearance of the menu items adapts based on the sidebar's state.
+ *
+ * @param {Object} props - The properties for the component.
+ * @param {Route[]} props.routes - An array of route objects to be displayed in the sidebar.
+ * @returns {JSX.Element} The rendered sidebar navigation menu.
+ */
 export default function DashboardNavigation({ routes }: { routes: Route[] }) {
   const { state } = useSidebar();
   const isCollapsed = state === "collapsed";
