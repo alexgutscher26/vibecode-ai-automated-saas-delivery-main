@@ -31,6 +31,9 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 
+/**
+ * Renders a form for managing personal and professional information.
+ */
 export default function AccountBasicInfo01() {
   const [birthDate, setBirthDate] = React.useState<Date>()
 
