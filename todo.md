@@ -1,4 +1,4 @@
-# VibeCode MVP Delivery Flow - Development Todo
+# VibeCode MVP Delivery Roadmap & Tasks
 
 ## Status Legend
 
@@ -7,225 +7,205 @@
 
 ## Immediate Priorities
 
-- [ ] Create canonical SaaS idea intake form
-- [ ] Implement form validation and persist intake to Supabase
-- [ ] Replace mock dashboard data with dynamic models
-- [ ] Build blueprint prompt engine v0.1
-- [ ] Set up API routes for data processing
-- [ ] Introduce Zustand for shared client state
+- [ ] Create canonical SaaS idea intake form (Phase 1)
+- [ ] Implement form validation and persist intake to Supabase (Phase 1)
+- [ ] Replace mock dashboard data with dynamic models (Phase 5)
+- [ ] Build blueprint prompt engine v0.1 (Phase 2)
+- [ ] Set up API routes for data processing (Backend/Data Layer)
+- [ ] Introduce Zustand for shared client state (Data Layer)
 
 ## 🎯 Phase 1: Opportunity Intake & Requirement Consolidation
 
 **Objective**: Align on core value proposition and minimal interaction model for market validation
 
-### Key Deliverables
+### Deliverables
 
-- [x] **UI Mock Implementation**: Dashboard UI components already exist as static prototypes
-- [ ] Create Canonical SaaS Idea Intake Form
-- [ ] Define Validation Pillar Definitions
-- [ ] Build Initial Blueprint Prompt Engine (v0.1)
-- [ ] Establish Success Criteria Matrix (activation, blueprint quality, ticket accuracy)
+- [x] UI mock implementation: dashboard prototypes exist
+- [ ] Canonical SaaS idea intake form
+- [ ] Validation pillar definitions
+- [ ] Initial blueprint prompt engine (v0.1)
+- [ ] Success criteria matrix (activation, blueprint quality, ticket accuracy)
 
-### Technical Implementation
+### Technical
 
-- [x] **Dashboard Layout**: Grid structure with mock components (src/app/dashboard/page.tsx)
-- [x] **UI Components**: Reusable UI primitives available (src/components/ui/)
-- [x] **Mock Dashboard Widgets**: Static components exist (stats, blueprint, velocity, etc.)
-- [ ] Replace static mock data with dynamic models backed by Supabase
-- [ ] Implement form validation and persist intake to Supabase
-- [ ] Create validation scoring algorithms
-- [ ] Build prompt template system for blueprint generation
-
----
+- [x] Dashboard layout: grid with mock components (`src/app/dashboard/page.tsx`)
+- [x] UI primitives: reusable components (`src/components/ui/`)
+- [x] Mock dashboard widgets (stats, blueprint, velocity)
+- [ ] Replace static mock data with Supabase-backed models
+- [ ] Intake form validation + persistence to Supabase
+- [ ] Validation scoring algorithms
+- [ ] Prompt template system for blueprint generation
 
 ## 🏗️ Phase 2: Blueprint Engine (MVP Scope)
 
 **Objective**: Transform idea description into structured SaaS Blueprint v1
 
-### MVP Components
+### Components
 
-- [ ] **Market Validation Pillar**: Lightweight scoring system
-- [ ] **Feature Extraction Engine**: Parse and categorize features
-- [ ] **Technical Stack Recommendation**: Stub implementation
-- [ ] **Pricing Model Generator**: Tiered baseline recommendations
-- [ ] **Summarized Improvement Insights**: Key improvement suggestions
+- [ ] Market validation pillar: lightweight scoring
+- [ ] Feature extraction engine: parse and categorize features
+- [ ] Technical stack recommendation: stub
+- [ ] Pricing model generator: tiered baseline
+- [ ] Summarized improvement insights
 
 ### Output
 
 - [ ] Generate SaaS Blueprint v1 JSON document
-- [ ] Implement blueprint export functionality (JSON/PDF)
-- [x] **Existing Blueprint UI**: Mock blueprint page exists (src/app/dashboard/blueprint/page.tsx) - needs enhancement
-
----
+- [ ] Blueprint export (JSON/PDF)
+- [x] Existing blueprint UI: mock page (`src/app/dashboard/blueprint/page.tsx`) — enhance
 
 ## 🔀 Phase 3: Feature-to-Flow Conversion Engine
 
 **Objective**: Convert extracted features into diagram-friendly graph data
 
-### MVP Inclusions
+### Components
 
-- [ ] **Node + Edge Generator**: Create graph structure from features
-- [ ] **Linear Flow Layout**: Auto-arrange nodes for readability
-- [ ] **Exportable JSON Model**: Standardized flow diagram format
-- [ ] **Auto-cleanup**: Remove duplicates, flatten loops
+- [ ] Node + edge generator
+- [ ] Linear flow layout (auto-arrange)
+- [ ] Exportable JSON model (standardized format)
+- [ ] Auto-cleanup (dedupe, flatten loops)
 
-### Technical Requirements
+### Technical
 
-- [x] **Mock User Flow Diagram**: Basic SVG flow exists (src/app/dashboard/user-flow/page.tsx)
-- [ ] Integrate React Flow for graph visualization
-- [ ] Implement layout algorithms for optimal node positioning
-- [ ] Enhance existing flow diagram rendering components
-- [ ] Build JSON export functionality
-
----
+- [x] Mock user flow diagram: basic SVG (`src/app/dashboard/user-flow/page.tsx`)
+- [ ] Integrate React Flow for visualization
+- [ ] Layout algorithms for node positioning
+- [ ] Enhance flow diagram rendering components
+- [ ] JSON export functionality
 
 ## 🎫 Phase 4: Ticketization Layer (Kanban Builder)
 
 **Objective**: Convert blueprint into actionable backlog items
 
-### MVP Components
+### Components
 
-- [ ] **Epic Generator**: Create high-level feature epics
-- [ ] **Task + Subtask Templates**: Break down epics into actionable items
-- [ ] **Metadata Assignment**: Status, complexity, owner placeholders
-- [ ] **Local Kanban Integration**: Basic kanban board implementation
+- [ ] Epic generator
+- [ ] Task + subtask templates
+- [ ] Metadata assignment (status, complexity, owner)
+- [ ] Local kanban integration
 
 ### Output
 
-- [ ] Generate backlog bundle (epics, tasks, subtasks)
-- [x] **Mock Kanban Board**: Static kanban UI exists (src/app/dashboard/kanban/page.tsx)
-- [ ] Implement drag-and-drop functionality
-- [ ] Replace static data with dynamic task management backed by Supabase
-- [ ] Build task assignment system
-
----
+- [ ] Backlog bundle (epics, tasks, subtasks)
+- [x] Mock kanban board: static UI (`src/app/dashboard/kanban/page.tsx`)
+- [ ] Drag-and-drop functionality
+- [ ] Dynamic task management backed by Supabase
+- [ ] Task assignment system
 
 ## 📊 Phase 5: Progress Tracking (Dashboard v0.1)
 
 **Objective**: Provide operational cockpit for monitoring creation progress
 
-### Core Modules
+### Modules
 
-- [ ] **% Completion Indicator**: Track overall progress
-- [ ] **Feature → Node → Task Counter**: Show conversion metrics
-- [ ] **Latest Generated Assets**: Display recent blueprints/diagrams
-- [ ] **Opportunity Health Score**: Basic project health assessment
+- [ ] % completion indicator
+- [ ] Feature → node → task counter
+- [ ] Latest generated assets
+- [ ] Opportunity health score
 
-### Dashboard Features
+### Dashboard
 
-- [x] **Responsive Dashboard Layout**: Basic grid layout exists
-- [x] **Mock Dashboard Components**: Static widgets with placeholder data
-- [ ] Replace static data with real-time progress updates via Supabase
-- [ ] Build dynamic asset gallery view
-- [ ] Add filtering and search capabilities
-- [ ] **IMPORTANT**: Current dashboard is mock/prototype - NOT final design
-
----
+- [x] Responsive layout: grid
+- [x] Mock components: placeholder data
+- [ ] Real-time progress updates via Supabase
+- [ ] Dynamic asset gallery view
+- [ ] Filtering and search
+- [ ] Note: current dashboard is mock/prototype — not final
 
 ## 🤖 Phase 6: MCP Broker (Stub Version)
 
-**Objective**: Deploy foundational control plane for future agent automation
+**Objective**: Foundational control plane for future agent automation
 
-### MVP Capabilities
+### Capabilities
 
-- [ ] **Credential Onboarding**: Secure API key management
-- [ ] **Connection Health Check**: Monitor external integrations
-- [ ] **"Dry Run" Execution Mode**: Test without real actions
-- [ ] **Foundation Setup**: Prepare for post-MVP automation
+- [ ] Credential onboarding (secure API keys)
+- [ ] Connection health checks
+- [ ] Dry run execution mode
+- [ ] Extensible foundation for post-MVP automation
 
-### Technical Implementation
+### Technical
 
-- [ ] Build credential management system
-- [ ] Implement health check endpoints
-- [ ] Create dry run simulation engine
-- [ ] Design extensible agent architecture
-
----
+- [ ] Credential management system
+- [ ] Health check endpoints
+- [ ] Dry run simulation engine
+- [ ] Extensible agent architecture
 
 ## 🎨 Phase 7: System UX & User Journey
 
 **Objective**: Ensure frictionless workflow traversal
 
-### User Flow
+### Flow
 
-- [ ] **Enter SaaS Idea**: Intuitive idea input interface
-- [ ] **Receive Blueprint v1**: Clear blueprint presentation
-- [ ] **Auto-generate User Flow Diagram**: One-click diagram creation
-- [ ] **Auto-generate Kanban Tickets**: Seamless ticket generation
-- [ ] **View Dashboard Summary**: Comprehensive overview
-- [ ] **Connect MCP (Optional)**: Future upgrade path
+- [ ] Enter SaaS idea: intuitive input
+- [ ] Receive Blueprint v1: clear presentation
+- [ ] Auto-generate user flow diagram: one-click
+- [ ] Auto-generate kanban tickets: seamless
+- [ ] View dashboard summary: comprehensive overview
+- [ ] Connect MCP (optional): future upgrade
 
-### UX Requirements
+### UX
 
-- [x] **Existing Design System**: Tailwind CSS, Radix UI components available
-- [x] **Mock Navigation**: Dashboard header and routing exists
-- [ ] Enhance existing UI with dynamic functionality
-- [ ] Add progress indicators and loading states
-- [ ] Create responsive design improvements
-
----
+- [x] Design system: Tailwind CSS, Radix UI
+- [x] Mock navigation: header and routing exists
+- [ ] Dynamic functionality enhancements
+- [ ] Progress indicators and loading states
+- [ ] Responsive design improvements
 
 ## 🛡️ Phase 8: Stability, QA, and Risk Controls
 
 **Objective**: De-risk MVP experience through comprehensive testing
 
-### Required QA
+### QA
 
-- [ ] **Pipeline Testing**: End-to-end idea → blueprint → diagram → tickets
-- [ ] **Diagram Integrity Validation**: Ensure diagram accuracy
-- [ ] **Prompt Regression Testing**: Maintain prompt quality
-- [ ] **Load Testing**: 250-500 blueprints/hour capacity
-- [ ] **Input Sanitization**: Guard against malicious inputs
-- [ ] **Generation Limits**: Prevent runaway processes
+- [ ] Pipeline testing: idea → blueprint → diagram → tickets
+- [ ] Diagram integrity validation
+- [ ] Prompt regression testing
+- [ ] Load testing: 250–500 blueprints/hour
+- [ ] Input sanitization
+- [ ] Generation limits
 
-### Testing Infrastructure
+### Infrastructure
 
-- [ ] Set up automated testing suite
-- [ ] Implement performance monitoring
-- [ ] Create error handling and logging
-- [ ] Build rollback mechanisms
-
----
+- [ ] Automated testing suite
+- [ ] Performance monitoring
+- [ ] Error handling and logging
+- [ ] Rollback mechanisms
 
 ## 🚀 Phase 9: Deployment & Telemetry
 
 **Objective**: Establish robust release footprint for real-world usage
 
-### MVP Requirements
+### Requirements
 
-- [ ] **Observability**: Logs, errors, pipeline timing metrics
-- [ ] **Versioned API**: Stable API for external integrations
-- [ ] **Canary Release Toggle**: Gradual rollout capability
-- [ ] **Usage Analytics**: Track blueprints, conversion rates
+- [ ] Observability: logs, errors, pipeline timing metrics
+- [ ] Versioned API: stable external integrations
+- [ ] Canary release toggle
+- [ ] Usage analytics: blueprints, conversion rates
 
-### Deployment Setup
+### Setup
 
 - [ ] Configure production environment
-- [ ] Set up monitoring and alerting
-- [ ] Implement CI/CD pipeline
-- [ ] Create deployment documentation
-
----
+- [ ] Monitoring and alerting
+- [ ] CI/CD pipeline
+- [ ] Deployment documentation
 
 ## 🔄 Phase 10: Feedback Loop & Iteration Cycle
 
-**Objective**: Drive iterative product-market validation
+**Objective**: Drive iterative product–market validation
 
-### Feedback Mechanisms
+### Mechanisms
 
-- [ ] **In-app Feedback Widget**: Collect user input
-- [ ] **Heatmapping**: Identify drop-off points
-- [ ] **Weekly Quality Audits**: Review blueprint quality
-- [ ] **Conversion Metrics**: Track idea → blueprint → ticketing → dashboard
+- [ ] In-app feedback widget
+- [ ] Heatmapping: identify drop-off points
+- [ ] Weekly quality audits: blueprint quality
+- [ ] Conversion metrics: idea → blueprint → ticketing → dashboard
 
-### Analytics Implementation
+### Analytics
 
-- [ ] Set up user behavior tracking
-- [ ] Create feedback analysis dashboard
-- [ ] Implement A/B testing framework
-- [ ] Build iteration planning system
-
----
+- [ ] User behavior tracking
+- [ ] Feedback analysis dashboard
+- [ ] A/B testing framework
+- [ ] Iteration planning system
 
 ## 📋 End-to-End MVP Flow Summary
 
@@ -235,44 +215,42 @@ Idea Input → Blueprint Engine → Diagram Engine → Ticket Builder → Dashbo
 
 ## 🏗️ Current Project State
 
-### ✅ Existing Components (Mock/Prototype)
+### Existing Components (Mock/Prototype)
 
-- **Dashboard Layout**: Grid structure with mock widgets (src/app/dashboard/page.tsx)
-- **Blueprint UI**: Static blueprint page (src/app/dashboard/blueprint/page.tsx)
-- **User Flow Diagram**: Basic SVG mock (src/app/dashboard/user-flow/page.tsx)
-- **Kanban Board**: Static kanban UI (src/app/dashboard/kanban/page.tsx)
-- **UI Components**: Reusable Radix UI + Tailwind components (src/components/ui/)
-- **Navigation**: Dashboard header with routing (src/components/dashboard/dashboard-header.tsx)
+- Dashboard layout: grid with mock widgets (`src/app/dashboard/page.tsx`)
+- Blueprint UI: static page (`src/app/dashboard/blueprint/page.tsx`)
+- User flow diagram: basic SVG mock (`src/app/dashboard/user-flow/page.tsx`)
+- Kanban board: static UI (`src/app/dashboard/kanban/page.tsx`)
+- UI components: Radix UI + Tailwind (`src/components/ui/`)
+- Navigation: dashboard header with routing (`src/components/dashboard/dashboard-header.tsx`)
 
-### ⏳ Planned Implementation
+### Planned Implementation
 
-- **Data Layer**: Supabase integration for persistent storage
-- **State Management**: Zustand for React state management
-- **Backend Services**: API routes for data processing
-- **Real Functionality**: Replace all static data with dynamic content
-- **Enhanced Visualization**: Replace SVG mocks with interactive diagrams
+- Data layer: Supabase integration for persistence
+- State management: Zustand for React
+- Backend services: API routes for processing
+- Real functionality: replace static data with dynamic content
+- Enhanced visualization: interactive diagrams
 
 ### Technical Stack Status
 
-- **Frontend**: Next.js 15, React 19, TypeScript, Tailwind CSS ✅ **EXISTS**
-- **UI Components**: Radix UI, Lucide React icons ✅ **EXISTS**
-- **Mock Components**: Static dashboard widgets ✅ **EXISTS**
-- **Backend**: Not implemented yet ⏳ **PLANNED**
-- **State Management**: Not implemented yet ⏳ **PLANNED**
-- **Data Layer**: Not implemented yet ⏳ **PLANNED**
-- **Visualization**: Basic SVG mock, needs enhancement ⏳ **ENHANCEMENT NEEDED**
-
----
+- Frontend: Next.js 15, React 19, TypeScript, Tailwind CSS — EXISTS
+- UI components: Radix UI, Lucide React — EXISTS
+- Mock components: static widgets — EXISTS
+- Backend: not implemented — PLANNED
+- State management: not implemented — PLANNED
+- Data layer: not implemented — PLANNED
+- Visualization: basic SVG mock — ENHANCEMENT NEEDED
 
 ## 📝 Important Notes
 
-- **Current dashboard UI is MOCK/PROTOTYPE** - not final design
-- All existing components use static/hardcoded data
-- Foundation UI components and layout structure are ready for enhancement
-- Focus should be on adding dynamic functionality to existing mock components
-- Design system (Tailwind + Radix) is established and ready for final implementation
+- Current dashboard UI is mock/prototype — not final
+- Existing components use static/hardcoded data
+- Foundation UI and layout are ready for enhancement
+- Focus on adding dynamic functionality to existing mock components
+- Design system (Tailwind + Radix) is established
 
-# Workspace Diagram Editor TODO
+## Workspace Diagram Editor TODO
 
 - Create editor route under `/dashboard/workspace/[projectId]/editor`
 - Implement canvas UI shell (toolbar, panel, minimap)
