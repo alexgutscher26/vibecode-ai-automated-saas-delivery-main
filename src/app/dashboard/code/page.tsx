@@ -71,6 +71,9 @@ const codeSnippets = [
   },
 ];
 
+/**
+ * Renders the Code Workspace page with integration features for Cursor IDE.
+ */
 export default function CodeWorkspacePage() {
   return (
     <div className="min-h-screen bg-background">
