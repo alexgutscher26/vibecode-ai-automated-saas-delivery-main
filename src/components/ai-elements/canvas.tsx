@@ -6,6 +6,9 @@ type CanvasProps = ReactFlowProps & {
   children?: ReactNode;
 };
 
+/**
+ * Renders a Canvas component with ReactFlow and background.
+ */
 export const Canvas = ({ children, ...props }: CanvasProps) => (
   <ReactFlow
     deleteKeyCode={["Backspace", "Delete"]}

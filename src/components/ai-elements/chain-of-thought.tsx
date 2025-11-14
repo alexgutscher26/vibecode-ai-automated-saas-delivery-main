@@ -26,6 +26,9 @@ const ChainOfThoughtContext = createContext<ChainOfThoughtContextValue | null>(
   null
 );
 
+/**
+ * Retrieves the context from ChainOfThoughtContext.
+ */
 const useChainOfThought = () => {
   const context = useContext(ChainOfThoughtContext);
   if (!context) {
