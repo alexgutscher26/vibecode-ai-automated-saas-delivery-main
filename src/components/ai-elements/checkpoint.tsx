@@ -29,6 +29,9 @@ export const Checkpoint = ({
 
 export type CheckpointIconProps = LucideProps;
 
+/**
+ * Renders a CheckpointIcon component, displaying children or a BookmarkIcon.
+ */
 export const CheckpointIcon = ({
   className,
   children,
