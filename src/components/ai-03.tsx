@@ -30,6 +30,9 @@ import {
 } from "@tabler/icons-react";
 import { useRef, useState } from "react";
 
+/**
+ * A functional component that renders a user interface for input and model selection.
+ */
 export default function Ai03() {
   const [input, setInput] = useState("");
   const [selectedModel, setSelectedModel] = useState("Local");

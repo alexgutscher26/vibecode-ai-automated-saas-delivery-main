@@ -1,6 +1,9 @@
 import { LinkedIn, X, Instagram, YouTube, Figma, Github, Threads, Pinterest } from "@aliimam/logos";
 import Link from "next/link";
 
+/**
+ * Renders a section for connecting with the user, displaying social links and contact information.
+ */
 export default function Connect01() {
   return (
     <section className="py-20 flex min-h-screen flex-col items-center justify-center">
@@ -74,6 +77,9 @@ export default function Connect01() {
   );
 }
 
+/**
+ * Renders an integration component with an icon, name, links, and description.
+ */
 const Integration = ({
   icon,
   name,
