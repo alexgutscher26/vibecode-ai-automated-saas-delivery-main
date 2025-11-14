@@ -40,6 +40,9 @@ export const ArtifactHeader = ({
 
 export type ArtifactCloseProps = ComponentProps<typeof Button>;
 
+/**
+ * Renders a close button with optional children and customizable styles.
+ */
 export const ArtifactClose = ({
   className,
   children,
@@ -73,6 +76,9 @@ export const ArtifactTitle = ({ className, ...props }: ArtifactTitleProps) => (
 
 export type ArtifactDescriptionProps = HTMLAttributes<HTMLParagraphElement>;
 
+/**
+ * Renders a paragraph element with specified className and props.
+ */
 export const ArtifactDescription = ({
   className,
   ...props
@@ -95,6 +101,22 @@ export type ArtifactActionProps = ComponentProps<typeof Button> & {
   icon?: LucideIcon;
 };
 
+/**
+ * Renders an action button with optional tooltip functionality.
+ *
+ * The function constructs a button using the provided properties such as tooltip, label, icon, and className.
+ * If a tooltip is specified, it wraps the button in a TooltipProvider and displays the tooltip content on hover.
+ * Otherwise, it simply returns the button. The button's appearance can be customized using size and variant props.
+ *
+ * @param {Object} props - The properties for the ArtifactAction component.
+ * @param {string} [props.tooltip] - The text to display in the tooltip.
+ * @param {string} [props.label] - The label for the button.
+ * @param {React.ComponentType} [props.icon] - The icon component to render.
+ * @param {React.ReactNode} [props.children] - The content to display inside the button.
+ * @param {string} [props.className] - Additional class names for styling.
+ * @param {string} [props.size] - The size of the button, defaults to "sm".
+ * @param {string} [props.variant] - The variant of the button, defaults to "ghost".
+ */
 export const ArtifactAction = ({
   tooltip,
   label,
@@ -139,6 +161,9 @@ export const ArtifactAction = ({
 
 export type ArtifactContentProps = HTMLAttributes<HTMLDivElement>;
 
+/**
+ * Renders a div with specified className and props.
+ */
 export const ArtifactContent = ({
   className,
   ...props
