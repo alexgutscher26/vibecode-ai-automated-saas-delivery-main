@@ -8,164 +8,120 @@ import {
   SidebarTrigger,
   useSidebar,
 } from "@/components/ui/sidebar";
+import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 import {
   Activity,
-  DollarSign,
   Home,
   Infinity,
   LinkIcon,
   Package2,
-  Percent,
   PieChart,
   Settings,
-  ShoppingBag,
   Sparkles,
-  Store,
   TrendingUp,
   Users,
+  Sun,
+  Moon,
+  Folder,
 } from "lucide-react";
 import { Logo } from "@/components/logo";
 import type { Route } from "./nav-main";
 import DashboardNavigation from "@/components/nav-main";
-import { NotificationsPopover } from "@/components/nav-notifications";
 import { TeamSwitcher } from "@/components/team-switcher";
+import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
 
-const sampleNotifications = [
-  {
-    id: "1",
-    avatar: "/avatars/01.png",
-    fallback: "OM",
-    text: "New order received.",
-    time: "10m ago",
-  },
-  {
-    id: "2",
-    avatar: "/avatars/02.png",
-    fallback: "JL",
-    text: "Server upgrade completed.",
-    time: "1h ago",
-  },
-  {
-    id: "3",
-    avatar: "/avatars/03.png",
-    fallback: "HH",
-    text: "New user signed up.",
-    time: "2h ago",
-  },
-];
 
 const dashboardRoutes: Route[] = [
   {
-    id: "home",
-    title: "Home",
+    id: "dashboard",
+    title: "Dashboard",
     icon: <Home className="size-4" />,
-    link: "#",
+    link: "/dashboard",
   },
   {
-    id: "products",
-    title: "Products",
+    id: "blueprint",
+    title: "Blueprint",
     icon: <Package2 className="size-4" />,
-    link: "#",
+    link: "/dashboard/blueprint",
     subs: [
-      {
-        title: "Catalogue",
-        link: "#",
-        icon: <Package2 className="size-4" />,
-      },
-      {
-        title: "Checkout Links",
-        link: "#",
-        icon: <LinkIcon className="size-4" />,
-      },
-      {
-        title: "Discounts",
-        link: "#",
-        icon: <Percent className="size-4" />,
-      },
+      { title: "Overview", link: "#" },
+      { title: "Strategy", link: "#" },
+      { title: "Tech Stack", link: "#" },
     ],
   },
   {
-    id: "usage-billing",
-    title: "Usage Billing",
+    id: "user-flow",
+    title: "User Flow",
+    icon: <Activity className="size-4" />,
+    link: "/dashboard/user-flow",
+    subs: [
+      { title: "Map", link: "#" },
+      { title: "Scenarios", link: "#" },
+    ],
+  },
+  {
+    id: "kanban",
+    title: "Kanban Board",
     icon: <PieChart className="size-4" />,
-    link: "#",
+    link: "/dashboard/kanban",
     subs: [
-      {
-        title: "Meters",
-        link: "#",
-        icon: <PieChart className="size-4" />,
-      },
-      {
-        title: "Events",
-        link: "#",
-        icon: <Activity className="size-4" />,
-      },
+      { title: "Backlog", link: "#" },
+      { title: "In Progress", link: "#" },
+      { title: "Done", link: "#" },
     ],
   },
   {
-    id: "benefits",
-    title: "Benefits",
-    icon: <Sparkles className="size-4" />,
-    link: "#",
-  },
-  {
-    id: "customers",
-    title: "Customers",
+    id: "agents",
+    title: "Agents",
     icon: <Users className="size-4" />,
-    link: "#",
-  },
-  {
-    id: "sales",
-    title: "Sales",
-    icon: <ShoppingBag className="size-4" />,
-    link: "#",
+    link: "/dashboard/agents",
     subs: [
-      {
-        title: "Orders",
-        link: "#",
-        icon: <ShoppingBag className="size-4" />,
-      },
-      {
-        title: "Subscriptions",
-        link: "#",
-        icon: <Infinity className="size-4" />,
-      },
+      { title: "All Agents", link: "#" },
+      { title: "Tasks", link: "#" },
+      { title: "Logs", link: "#" },
     ],
   },
   {
-    id: "storefront",
-    title: "Storefront",
-    icon: <Store className="size-4" />,
-    link: "#",
-  },
-  {
-    id: "analytics",
-    title: "Analytics",
-    icon: <TrendingUp className="size-4" />,
-    link: "#",
-  },
-  {
-    id: "finance",
-    title: "Finance",
-    icon: <DollarSign className="size-4" />,
-    link: "#",
+    id: "code",
+    title: "Code Workspace",
+    icon: <Infinity className="size-4" />,
+    link: "/dashboard/code",
     subs: [
-      { title: "Incoming", link: "#" },
-      { title: "Outgoing", link: "#" },
-      { title: "Payout Account", link: "#" },
+      { title: "Files", link: "#" },
+      { title: "Pull Requests", link: "#" },
+      { title: "Branches", link: "#" },
+    ],
+  },
+  {
+    id: "workspace",
+    title: "Workspace",
+    icon: <Folder className="size-4" />,
+    link: "/dashboard/workspace",
+  },
+  {
+    id: "releases",
+    title: "Releases",
+    icon: <Sparkles className="size-4" />,
+    link: "/dashboard/releases",
+    subs: [
+      { title: "Stable", link: "#" },
+      { title: "Beta", link: "#" },
+      { title: "Canary", link: "#" },
     ],
   },
   {
     id: "settings",
     title: "Settings",
     icon: <Settings className="size-4" />,
-    link: "#",
+    link: "/dashboard/settings",
     subs: [
-      { title: "General", link: "#" },
-      { title: "Webhooks", link: "#" },
-      { title: "Custom Fields", link: "#" },
+      { title: "Profile", link: "#" },
+      { title: "Notifications", link: "#" },
+      { title: "Security", link: "#" },
+      { title: "Appearance", link: "#" },
     ],
   },
 ];
@@ -179,6 +135,9 @@ const teams = [
 export function DashboardSidebar() {
   const { state } = useSidebar();
   const isCollapsed = state === "collapsed";
+  const { resolvedTheme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
 
   return (
     <Sidebar variant="floating" collapsible="icon">
@@ -190,11 +149,11 @@ export function DashboardSidebar() {
             : "flex-row items-center justify-between"
         )}
       >
-        <a href="#" className="flex items-center gap-2">
+        <a href="/" className="flex items-center gap-2">
           <Logo className="h-8 w-8" />
           {!isCollapsed && (
             <span className="font-semibold text-black dark:text-white">
-              Acme
+              VibeCode AI
             </span>
           )}
         </a>
@@ -209,7 +168,17 @@ export function DashboardSidebar() {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8 }}
         >
-          <NotificationsPopover notifications={sampleNotifications} />
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
+          >
+            {mounted && resolvedTheme === "dark" ? (
+              <Sun className="size-4" />
+            ) : (
+              <Moon className="size-4" />
+            )}
+          </Button>
           <SidebarTrigger />
         </motion.div>
       </SidebarHeader>

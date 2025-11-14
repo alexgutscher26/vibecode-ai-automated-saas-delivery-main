@@ -1,6 +1,7 @@
 "use client";
 
-import { DashboardHeader } from "@/components/dashboard/dashboard-header";
+import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
+import { DashboardSidebar } from "@/components/app-sidebar";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -106,10 +107,11 @@ const prs = [
 
 export default function ReleasesPage() {
   return (
-    <div className="min-h-screen bg-background">
-      <DashboardHeader />
-      
-      <main className="mx-auto max-w-[1600px] px-6 py-8">
+    <SidebarProvider>
+      <div className="relative flex h-screen w-full">
+        <DashboardSidebar />
+        <SidebarInset className="flex flex-col">
+          <main className="mx-auto max-w-[1600px] px-6 py-8">
         {/* Page Header */}
         <div className="mb-8">
           <div className="flex items-start justify-between">
@@ -434,7 +436,9 @@ export default function ReleasesPage() {
             </Card>
           </div>
         </div>
-      </main>
-    </div>
+          </main>
+        </SidebarInset>
+      </div>
+    </SidebarProvider>
   );
 }

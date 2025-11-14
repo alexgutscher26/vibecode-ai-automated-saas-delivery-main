@@ -1,6 +1,7 @@
 "use client";
 
-import { DashboardHeader } from "@/components/dashboard/dashboard-header";
+import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
+import { DashboardSidebar } from "@/components/app-sidebar";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -18,10 +19,11 @@ import {
 
 export default function SettingsPage() {
   return (
-    <div className="min-h-screen bg-background">
-      <DashboardHeader />
-      
-      <main className="mx-auto max-w-[1200px] px-6 py-8">
+    <SidebarProvider>
+      <div className="relative flex h-screen w-full">
+        <DashboardSidebar />
+        <SidebarInset className="flex flex-col">
+          <main className="mx-auto max-w-[1200px] px-6 py-8">
         {/* Page Header */}
         <div className="mb-8">
           <h1 className="text-3xl font-bold">Settings</h1>
@@ -253,7 +255,9 @@ export default function SettingsPage() {
             </Card>
           </div>
         </div>
-      </main>
-    </div>
+          </main>
+        </SidebarInset>
+      </div>
+    </SidebarProvider>
   );
 }

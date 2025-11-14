@@ -1,4 +1,5 @@
-import { DashboardHeader } from "@/components/dashboard/dashboard-header";
+import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
+import { DashboardSidebar } from "@/components/app-sidebar";
 import { ProjectOverviewPanel } from "@/components/dashboard/project-overview-panel";
 import { BlueprintSummary } from "@/components/dashboard/blueprint-summary";
 import { VelocityMetrics } from "@/components/dashboard/velocity-metrics";
@@ -12,10 +13,11 @@ import { QuickActions } from "@/components/dashboard/quick-actions";
 
 export default function DashboardPage() {
   return (
-    <div className="min-h-screen bg-background">
-      <DashboardHeader />
-      
-      <main className="mx-auto max-w-[1600px] px-6 py-8">
+    <SidebarProvider>
+      <div className="relative flex h-screen w-full">
+        <DashboardSidebar />
+        <SidebarInset className="flex flex-col">
+          <main className="mx-auto max-w-[1600px] px-6 py-8">
         {/* Stats Overview - Full Width */}
         <div className="mb-8">
           <StatsOverview />
@@ -44,7 +46,9 @@ export default function DashboardPage() {
             <InsightsSidebar />
           </div>
         </div>
-      </main>
-    </div>
+          </main>
+        </SidebarInset>
+      </div>
+    </SidebarProvider>
   );
 }
