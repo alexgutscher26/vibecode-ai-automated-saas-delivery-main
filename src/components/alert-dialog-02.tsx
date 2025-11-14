@@ -14,6 +14,9 @@ import {
 import { Button } from "@/components/ui/button";
 import { Trash2 } from "@aliimam/icons";
 
+/**
+ * Renders a confirmation dialog for permanently deleting a file.
+ */
 export default function AlertDialog02() {
   return (
     <div className="flex gap-2">
