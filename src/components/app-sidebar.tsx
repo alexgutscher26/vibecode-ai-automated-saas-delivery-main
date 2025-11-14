@@ -176,6 +176,14 @@ const teams = [
   { id: "3", name: "Gamma Tech", logo: Logo, plan: "Free" },
 ];
 
+/**
+ * Renders the dashboard sidebar component.
+ *
+ * The DashboardSidebar function utilizes the useSidebar hook to determine the current state of the sidebar,
+ * specifically whether it is collapsed or expanded. Based on this state, it conditionally applies styles
+ * and renders various components such as the SidebarHeader, SidebarContent, and SidebarFooter,
+ * including a logo, notifications, and team switcher functionality.
+ */
 export function DashboardSidebar() {
   const { state } = useSidebar();
   const isCollapsed = state === "collapsed";
