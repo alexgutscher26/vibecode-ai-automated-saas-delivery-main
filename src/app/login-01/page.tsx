@@ -1,6 +1,9 @@
 import { LoginForm } from "@/components/login-form";
 import { ShaderRipple } from "@/components/shader-ripple";
 
+/**
+ * Renders the main page component with a login form and a shader ripple effect.
+ */
 export default function Page() {
   return (
     <div className="h-screen flex items-center justify-center relative">
