@@ -1,6 +1,9 @@
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { DashboardSidebar } from "@/components/app-sidebar";
 
+/**
+ * Renders the Sidebar component with a dashboard and inset.
+ */
 export default function Sidebar03() {
   return (
     <SidebarProvider>
