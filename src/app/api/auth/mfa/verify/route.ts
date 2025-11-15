@@ -8,6 +8,18 @@ import { authenticator } from 'otplib'
 
 const Schema = z.object({ code: z.string().min(6).max(6) })
 
+/**
+ * Handles the POST request for multi-factor authentication (MFA) verification.
+ *
+ * This function checks for a valid access token in cookies, verifies the token, and parses the request body against a schema.
+ * It retrieves the user associated with the token, checks if MFA is set up, validates the provided MFA code, and updates the user's MFA status.
+ * If successful, it generates a new access token and sets it in the response cookies.
+ * In case of errors, appropriate JSON responses are returned with relevant status codes.
+ *
+ * @param req - The incoming request object containing the MFA code in the body.
+ * @returns A JSON response indicating the success or failure of the MFA verification process.
+ * @throws Error If any step in the process fails, including token verification, user retrieval, or code validation.
+ */
 export async function POST(req: Request) {
   try {
     const access = cookies().get('access_token')?.value
