@@ -1,11 +1,11 @@
-import { LoginForm } from "@/components/login-form";
+import { ForgotPasswordForm } from "@/components/forgot-password-form"
 
 export default function Page() {
   return (
     <div className="h-screen flex items-center justify-center">
       <div className="w-full max-w-sm">
-        <LoginForm />
+        <ForgotPasswordForm />
       </div>
     </div>
-  );
+  )
 }

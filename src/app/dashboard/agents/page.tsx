@@ -1,10 +1,20 @@
 "use client";
 
+import { useMemo, useState } from "react";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { DashboardSidebar } from "@/components/app-sidebar";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectTrigger,
+  SelectContent,
+  SelectItem,
+  SelectValue,
+} from "@/components/ui/select";
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { 
   Bot, 
   Play, 
@@ -20,7 +30,21 @@ import {
   TrendingUp
 } from "lucide-react";
 
-const agents = [
+type Agent = {
+  id: string;
+  name: string;
+  status: "active" | "idle";
+  specialization: string;
+  currentTask: string | null;
+  tasksCompleted: number;
+  successRate: number;
+  avgCycleTime: string;
+  activity: Array<{ action: string; time: string; type: "code" | "pr" | "review" | "done" }>;
+  health: "healthy" | "warning";
+  capabilities: string[];
+};
+
+const initialAgents: Agent[] = [
   {
     id: "agent-alpha",
     name: "Agent-Alpha",
@@ -90,14 +114,57 @@ const agents = [
 ];
 
 export default function AgentsPage() {
+  const [agents, setAgents] = useState<Agent[]>(initialAgents);
+  const [query, setQuery] = useState("");
+  const [statusFilter, setStatusFilter] = useState<"all" | "active" | "idle">("all");
+  const [sortBy, setSortBy] = useState<"tasks" | "success" | "cycle">("tasks");
+  const [capFilter, setCapFilter] = useState<string | null>(null);
+
+  const filteredAgents = useMemo(() => {
+    let list = [...agents];
+    if (statusFilter !== "all") {
+      list = list.filter((a) => a.status === statusFilter);
+    }
+    if (capFilter) {
+      list = list.filter((a) => a.capabilities.includes(capFilter));
+    }
+    if (query.trim()) {
+      const q = query.toLowerCase();
+      list = list.filter(
+        (a) =>
+          a.name.toLowerCase().includes(q) ||
+          a.specialization.toLowerCase().includes(q) ||
+          (a.currentTask || "").toLowerCase().includes(q)
+      );
+    }
+    switch (sortBy) {
+      case "success":
+        list.sort((a, b) => b.successRate - a.successRate);
+        break;
+      case "cycle":
+        list.sort((a, b) => parseFloat(a.avgCycleTime) - parseFloat(b.avgCycleTime));
+        break;
+      default:
+        list.sort((a, b) => b.tasksCompleted - a.tasksCompleted);
+    }
+    return list;
+  }, [agents, statusFilter, sortBy, capFilter, query]);
+
+  const toggleStatus = (id: string) => {
+    setAgents((prev) =>
+      prev.map((a) =>
+        a.id === id ? { ...a, status: a.status === "active" ? "idle" : "active" } : a
+      )
+    );
+  };
   return (
     <SidebarProvider>
       <div className="relative flex h-screen w-full">
         <DashboardSidebar />
         <SidebarInset className="flex flex-col">
-          <main className="mx-auto max-w-[1600px] px-6 py-8">
+          <main className="mx-auto max-w-[1600px] px-4 py-4">
         {/* Page Header */}
-        <div className="mb-8">
+        <div className="mb-4">
           <div className="flex items-start justify-between">
             <div>
               <h1 className="text-3xl font-bold">AI Agent Operations</h1>
@@ -105,7 +172,7 @@ export default function AgentsPage() {
                 Monitor and manage your autonomous development workforce
               </p>
             </div>
-            <div className="flex gap-3">
+            <div className="flex gap-2">
               <Button variant="outline" size="sm">
                 <Settings className="size-4 mr-2" />
                 Configure
@@ -116,12 +183,53 @@ export default function AgentsPage() {
               </Button>
             </div>
           </div>
+          <div className="mt-2 flex flex-wrap items-center gap-2">
+            <div className="relative w-full sm:w-[280px]">
+              <Input
+                placeholder="Search agents, specialization, or task..."
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                className="pl-3"
+              />
+            </div>
+            <ToggleGroup
+              type="single"
+              value={statusFilter}
+              onValueChange={(v) => v && setStatusFilter(v as typeof statusFilter)}
+              spacing={0}
+            >
+              <ToggleGroupItem value="all">All</ToggleGroupItem>
+              <ToggleGroupItem value="active">Active</ToggleGroupItem>
+              <ToggleGroupItem value="idle">Idle</ToggleGroupItem>
+            </ToggleGroup>
+            <Select value={sortBy} onValueChange={(v) => setSortBy(v as typeof sortBy)}>
+              <SelectTrigger>
+                <SelectValue placeholder="Sort" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="tasks">Most Completed</SelectItem>
+                <SelectItem value="success">Highest Success</SelectItem>
+                <SelectItem value="cycle">Shortest Cycle</SelectItem>
+              </SelectContent>
+            </Select>
+            {capFilter && (
+              <Badge variant="outline" className="text-xs">
+                Filter: {capFilter}
+                <span
+                  className="ml-2 cursor-pointer"
+                  onClick={() => setCapFilter(null)}
+                >
+                  ✕
+                </span>
+              </Badge>
+            )}
+          </div>
         </div>
 
         {/* Stats Overview */}
-        <div className="grid gap-4 sm:grid-cols-4 mb-8">
+        <div className="grid gap-3 sm:grid-cols-4 mb-6">
           <Card>
-            <CardContent className="pt-6">
+            <CardContent className="pt-4">
               <div className="flex items-center justify-between mb-2">
                 <span className="text-sm text-muted-foreground">Active Agents</span>
                 <Activity className="size-4 text-emerald-500" />
@@ -134,7 +242,7 @@ export default function AgentsPage() {
           </Card>
 
           <Card>
-            <CardContent className="pt-6">
+            <CardContent className="pt-4">
               <div className="flex items-center justify-between mb-2">
                 <span className="text-sm text-muted-foreground">Tasks Completed</span>
                 <CheckCircle2 className="size-4 text-blue-500" />
@@ -145,7 +253,7 @@ export default function AgentsPage() {
           </Card>
 
           <Card>
-            <CardContent className="pt-6">
+            <CardContent className="pt-4">
               <div className="flex items-center justify-between mb-2">
                 <span className="text-sm text-muted-foreground">Success Rate</span>
                 <TrendingUp className="size-4 text-purple-500" />
@@ -156,7 +264,7 @@ export default function AgentsPage() {
           </Card>
 
           <Card>
-            <CardContent className="pt-6">
+            <CardContent className="pt-4">
               <div className="flex items-center justify-between mb-2">
                 <span className="text-sm text-muted-foreground">Avg Cycle Time</span>
                 <Clock className="size-4 text-amber-500" />
@@ -168,20 +276,20 @@ export default function AgentsPage() {
         </div>
 
         {/* Agent Cards */}
-        <div className="grid gap-6 lg:grid-cols-2">
-          {agents.map((agent) => (
+        <div className="grid gap-4 lg:grid-cols-2">
+          {filteredAgents.map((agent) => (
             <Card key={agent.id} className={`${
               agent.status === "active" ? "border-primary/20" : ""
             }`}>
               <CardHeader>
                 <div className="flex items-start justify-between">
                   <div className="flex items-center gap-3">
-                    <div className={`size-12 rounded-lg flex items-center justify-center ${
+                    <div className={`size-10 rounded-lg flex items-center justify-center ${
                       agent.status === "active" 
                         ? "bg-gradient-to-br from-primary/20 to-purple-500/20" 
                         : "bg-muted"
                     }`}>
-                      <Bot className={`size-6 ${
+                      <Bot className={`size-5 ${
                         agent.status === "active" ? "text-primary" : "text-muted-foreground"
                       }`} />
                     </div>
@@ -195,6 +303,11 @@ export default function AgentsPage() {
                         ) : (
                           <Badge variant="outline">Idle</Badge>
                         )}
+                        {agent.health === "warning" && (
+                          <Badge variant="outline" className="bg-amber-500/10 text-amber-600 border-amber-500/20">
+                            Health: Warning
+                          </Badge>
+                        )}
                       </CardTitle>
                       <p className="text-sm text-muted-foreground mt-1">
                         {agent.specialization}
@@ -205,23 +318,23 @@ export default function AgentsPage() {
                     {agent.health === "warning" && (
                       <AlertCircle className="size-4 text-amber-500" />
                     )}
-                    <Button variant="ghost" size="icon" className="size-8">
+                    <Button variant="ghost" size="icon" className="size-7" onClick={() => toggleStatus(agent.id)}>
                       {agent.status === "active" ? (
                         <Pause className="size-4" />
                       ) : (
                         <Play className="size-4" />
                       )}
                     </Button>
-                    <Button variant="ghost" size="icon" className="size-8">
+                    <Button variant="ghost" size="icon" className="size-7">
                       <Settings className="size-4" />
                     </Button>
                   </div>
                 </div>
               </CardHeader>
-              <CardContent className="space-y-6">
+              <CardContent className="space-y-4">
                 {/* Current Task */}
                 {agent.currentTask ? (
-                  <div className="p-4 bg-muted/50 rounded-lg">
+                  <div className="p-3 bg-muted/50 rounded-lg">
                     <div className="flex items-start gap-2 mb-2">
                       <Zap className="size-4 text-primary mt-0.5" />
                       <div className="flex-1">
@@ -234,7 +347,7 @@ export default function AgentsPage() {
                     </div>
                   </div>
                 ) : (
-                  <div className="p-4 bg-muted/30 rounded-lg border-2 border-dashed">
+                  <div className="p-3 bg-muted/30 rounded-lg border-2 border-dashed">
                     <div className="text-center text-sm text-muted-foreground">
                       No active task assigned
                     </div>
@@ -242,7 +355,7 @@ export default function AgentsPage() {
                 )}
 
                 {/* Performance Metrics */}
-                <div className="grid grid-cols-3 gap-4">
+                <div className="grid grid-cols-3 gap-3">
                   <div className="text-center">
                     <div className="text-2xl font-bold">{agent.tasksCompleted}</div>
                     <div className="text-xs text-muted-foreground mt-1">Completed</div>
@@ -259,9 +372,9 @@ export default function AgentsPage() {
 
                 {/* Recent Activity */}
                 <div className="space-y-2">
-                  <h4 className="text-sm font-semibold mb-3">Recent Activity</h4>
+                  <h4 className="text-sm font-semibold mb-2">Recent Activity</h4>
                   {agent.activity.map((item, i) => (
-                    <div key={i} className="flex items-start gap-3 text-sm">
+                    <div key={i} className="flex items-start gap-2 text-sm">
                       <div className={`size-6 rounded flex items-center justify-center mt-0.5 ${
                         item.type === "code" ? "bg-blue-500/10" :
                         item.type === "pr" ? "bg-purple-500/10" :
@@ -288,7 +401,12 @@ export default function AgentsPage() {
                   <h4 className="text-sm font-semibold mb-2">Capabilities</h4>
                   <div className="flex flex-wrap gap-2">
                     {agent.capabilities.map((cap, i) => (
-                      <Badge key={i} variant="outline" className="text-xs">
+                      <Badge
+                        key={i}
+                        variant="outline"
+                        className={`text-xs cursor-pointer ${capFilter === cap ? "bg-primary/10 border-primary/20" : ""}`}
+                        onClick={() => setCapFilter(cap)}
+                      >
                         {cap}
                       </Badge>
                     ))}
@@ -300,7 +418,7 @@ export default function AgentsPage() {
         </div>
 
         {/* System Health */}
-        <Card className="mt-8">
+        <Card className="mt-6">
           <CardHeader>
             <CardTitle>System Health & Logs</CardTitle>
           </CardHeader>
@@ -313,7 +431,7 @@ export default function AgentsPage() {
                 { type: "success", message: "Agent-Delta completed deployment pipeline tests", time: "2 hours ago" },
                 { type: "info", message: "System: All agents synchronized with latest codebase", time: "3 hours ago" },
               ].map((log, i) => (
-                <div key={i} className="flex items-start gap-3 p-3 border rounded-lg">
+                <div key={i} className="flex items-start gap-2 p-2 border rounded-lg">
                   <div className={`size-2 rounded-full mt-2 ${
                     log.type === "success" ? "bg-emerald-500" :
                     log.type === "warning" ? "bg-amber-500" :

@@ -12,15 +12,12 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 import {
-  Activity,
   Home,
   Infinity,
-  LinkIcon,
   Package2,
   PieChart,
   Settings,
   Sparkles,
-  TrendingUp,
   Users,
   Sun,
   Moon,
@@ -46,54 +43,24 @@ const dashboardRoutes: Route[] = [
     title: "Blueprint",
     icon: <Package2 className="size-4" />,
     link: "/dashboard/blueprint",
-    subs: [
-      { title: "Overview", link: "#" },
-      { title: "Strategy", link: "#" },
-      { title: "Tech Stack", link: "#" },
-    ],
-  },
-  {
-    id: "user-flow",
-    title: "User Flow",
-    icon: <Activity className="size-4" />,
-    link: "/dashboard/user-flow",
-    subs: [
-      { title: "Map", link: "#" },
-      { title: "Scenarios", link: "#" },
-    ],
   },
   {
     id: "kanban",
     title: "Kanban Board",
     icon: <PieChart className="size-4" />,
     link: "/dashboard/kanban",
-    subs: [
-      { title: "Backlog", link: "#" },
-      { title: "In Progress", link: "#" },
-      { title: "Done", link: "#" },
-    ],
   },
   {
     id: "agents",
     title: "Agents",
     icon: <Users className="size-4" />,
     link: "/dashboard/agents",
-    subs: [
-      { title: "All Agents", link: "#" },
-      { title: "Tasks", link: "#" },
-      { title: "Logs", link: "#" },
-    ],
   },
   {
     id: "code",
     title: "Code Workspace",
     icon: <Infinity className="size-4" />,
     link: "/dashboard/code",
-    subs: [
-      { title: "Files", link: "#" },
-      { title: "Pull Requests", link: "#" },
-      { title: "Branches", link: "#" },
-    ],
   },
   {
     id: "workspace",
@@ -106,23 +73,12 @@ const dashboardRoutes: Route[] = [
     title: "Releases",
     icon: <Sparkles className="size-4" />,
     link: "/dashboard/releases",
-    subs: [
-      { title: "Stable", link: "#" },
-      { title: "Beta", link: "#" },
-      { title: "Canary", link: "#" },
-    ],
   },
   {
     id: "settings",
     title: "Settings",
     icon: <Settings className="size-4" />,
     link: "/dashboard/settings",
-    subs: [
-      { title: "Profile", link: "#" },
-      { title: "Notifications", link: "#" },
-      { title: "Security", link: "#" },
-      { title: "Appearance", link: "#" },
-    ],
   },
 ];
 

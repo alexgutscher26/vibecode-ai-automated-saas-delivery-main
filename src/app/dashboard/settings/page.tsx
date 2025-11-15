@@ -16,8 +16,27 @@ import {
   Save,
   Trash2
 } from "lucide-react";
+import * as React from "react";
 
 export default function SettingsPage() {
+  const [profile, setProfile] = React.useState<{ email?: string; displayName?: string; role?: string; mfaEnabled?: boolean } | null>(null)
+  const [loading, setLoading] = React.useState(false)
+  const [error, setError] = React.useState<string | null>(null)
+
+  React.useEffect(() => {
+    let alive = true
+    setLoading(true)
+    fetch('/api/me')
+      .then(async (res) => {
+        if (!res.ok) throw new Error('Failed to load profile')
+        const data = await res.json()
+        const u = data.user || (data.session?.user ? { email: data.session.user.email, displayName: data.session.user.name } : null)
+        if (alive) setProfile(u)
+      })
+      .catch((e) => { if (alive) setError(e.message) })
+      .finally(() => { if (alive) setLoading(false) })
+    return () => { alive = false }
+  }, [])
   return (
     <SidebarProvider>
       <div className="relative flex h-screen w-full">
@@ -89,17 +108,17 @@ export default function SettingsPage() {
                 <div className="grid gap-4 sm:grid-cols-2">
                   <div className="space-y-2">
                     <Label htmlFor="firstName">First Name</Label>
-                    <Input id="firstName" defaultValue="John" />
+                    <Input id="firstName" defaultValue={profile?.displayName?.split(' ')[0] || ''} />
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="lastName">Last Name</Label>
-                    <Input id="lastName" defaultValue="Doe" />
+                    <Input id="lastName" defaultValue={profile?.displayName?.split(' ').slice(1).join(' ') || ''} />
                   </div>
                 </div>
 
                 <div className="space-y-2">
                   <Label htmlFor="email">Email Address</Label>
-                  <Input id="email" type="email" defaultValue="john.doe@example.com" />
+                  <Input id="email" type="email" defaultValue={profile?.email || ''} />
                 </div>
 
                 <div className="space-y-2">
@@ -223,7 +242,7 @@ export default function SettingsPage() {
                     <div>
                       <div className="font-semibold">Two-Factor Authentication</div>
                       <div className="text-sm text-muted-foreground">
-                        Add an extra layer of security
+                        {profile?.mfaEnabled ? 'Enabled' : 'Disabled'}
                       </div>
                     </div>
                     <Button variant="outline" size="sm">Enable</Button>
