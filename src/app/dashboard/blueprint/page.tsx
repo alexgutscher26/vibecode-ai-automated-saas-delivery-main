@@ -18,6 +18,9 @@ import {
   Download
 } from "lucide-react";
 
+/**
+ * Renders the BlueprintPage component, displaying a dashboard with strategic analysis and market validation.
+ */
 export default function BlueprintPage() {
   return (
     <SidebarProvider>

@@ -113,6 +113,15 @@ const initialAgents: Agent[] = [
   },
 ];
 
+/**
+ * Renders the Agents Page for monitoring and managing AI agents.
+ *
+ * This component provides an overview of active agents, their performance metrics, and recent activities.
+ * It includes a sidebar for navigation, displays statistics such as active agents, tasks completed, success rate,
+ * and average cycle time, and lists individual agent cards with detailed information and capabilities.
+ *
+ * @returns A JSX element representing the Agents Page.
+ */
 export default function AgentsPage() {
   const [agents, setAgents] = useState<Agent[]>(initialAgents);
   const [query, setQuery] = useState("");
