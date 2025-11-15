@@ -5,6 +5,14 @@ import { cookies } from 'next/headers'
 import { verifyAccessToken } from '@/lib/auth'
 import { authenticator } from 'otplib'
 
+/**
+ * Handles the POST request for setting up multi-factor authentication (MFA).
+ *
+ * This function retrieves the access token from cookies and verifies it. If the token is valid, it generates a TOTP secret and updates the user's MFA method in the database. It logs the initiation of the MFA setup and returns the OTP authentication URI. If any step fails, it returns an appropriate error response.
+ *
+ * @returns A JSON response containing the OTP authentication URI or an error message.
+ * @throws Error If there is a server error during the process.
+ */
 export async function POST() {
   try {
     const access = cookies().get('access_token')?.value
