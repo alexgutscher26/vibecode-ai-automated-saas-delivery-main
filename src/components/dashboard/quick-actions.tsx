@@ -29,7 +29,7 @@ const actions = [
   },
   {
     label: "Deploy Agent",
-    description: "Launch autonomous engineering agent",
+    description: "Launch autonomous agent",
     icon: Plus,
     href: "/dashboard/deploy-agent",
     color: "bg-amber-500/10 text-amber-500",
