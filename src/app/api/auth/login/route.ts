@@ -12,6 +12,18 @@ const LoginSchema = z.object({
   password: z.string().min(8),
 })
 
+/**
+ * Handles the POST request for user login.
+ *
+ * This function processes the incoming request by first checking the rate limit based on the user's IP address.
+ * It then validates the request body against the LoginSchema. If the input is valid, it checks the user's credentials
+ * and handles multi-factor authentication if enabled. Upon successful login, it generates access and refresh tokens,
+ * sets the appropriate cookies, and logs the event. In case of errors, it returns relevant error messages and statuses.
+ *
+ * @param req - The incoming request object containing user login information.
+ * @returns A JSON response indicating the result of the login attempt, including tokens if successful.
+ * @throws Error If an unexpected error occurs during the login process.
+ */
 export async function POST(req: Request) {
   try {
     const ip = (req.headers.get('x-forwarded-for') || 'unknown').split(',')[0].trim()
